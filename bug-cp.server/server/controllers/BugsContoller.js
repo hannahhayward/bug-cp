@@ -1,6 +1,7 @@
 import { Auth0Provider } from '@bcwdev/auth0provider'
 import BaseController from '../utils/BaseController'
 import { bugsService } from '../services/BugsService'
+import { notesService } from '../services/NotesService'
 export class BugsController extends BaseController {
   constructor() {
     super('api/bugs')
@@ -8,6 +9,7 @@ export class BugsController extends BaseController {
       .use(Auth0Provider.getAuthorizedUserInfo)
       .get('', this.getBugs)
       .get('/:id', this.getActiveBug)
+      .get('/:id/notes', this.getNotes)
       .post('', this.createBug)
       .put('/:id', this.editBug)
       .delete('/:id', this.deleteBug)
@@ -26,6 +28,15 @@ export class BugsController extends BaseController {
     try {
       const activeBug = await bugsService.getActiveBug(req.id)
       return res.send(activeBug)
+    } catch (error) {
+      next(error)
+    }
+  }
+
+  async getNotes(req, res, next) {
+    try {
+      const notes = await notesService.getNotes(req.id)
+      return res.send(notes)
     } catch (error) {
       next(error)
     }

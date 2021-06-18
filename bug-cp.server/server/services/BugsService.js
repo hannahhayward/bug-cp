@@ -16,7 +16,7 @@ class BugsService {
 
   async createBug(newBugData) {
     const bug = await dbContext.Bug.create(newBugData)
-    await bug.populate('crator', 'name picture').execPopopulate()
+    await bug.populate('crator', 'name picture').execPopulate()
     return bug
   }
 

@@ -1,7 +1,7 @@
 import mongoose from 'mongoose'
 const Schema = mongoose.Schema
 
-export const CommentSchema = new Schema(
+export const NoteSchema = new Schema(
   {
     body: { type: String, required: true },
     bug: { type: Schema.Types.ObjectId, ref: 'Bug', required: true },
@@ -9,7 +9,7 @@ export const CommentSchema = new Schema(
   },
   { timestamps: true, toJSON: { virtuals: true } })
 
-CommentSchema.virtual('creator', {
+NoteSchema.virtual('creator', {
   localField: 'creatorId',
   ref: 'Account',
   foreignField: '_id',
