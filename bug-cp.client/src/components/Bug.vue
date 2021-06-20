@@ -1,17 +1,23 @@
 <template>
   <div class="col-lg-10 m-auto">
-    <div class="card my-2">
+    <div class="card my-2 open" v-if="bug.status === false">
       <div class="card-header">
         <router-link :to="{ name: 'Bug', params: {id: bug.id}}" :key="bug.id">
           <h2>{{ bug.title }}</h2>
         </router-link>
-        <p>{{ bug.status }}</p>
+        <p class="red">
+          Open
+        </p>
       </div>
-      <div class="card-body">
-        <p>{{ bug.description }}</p>
-      </div>
-      <div class="card-footer">
-        {{ bug.creator.name }}
+    </div>
+    <div class="card my-2" v-if="bug.status === true">
+      <div class="card-header">
+        <router-link :to="{ name: 'Bug', params: {id: bug.id}}" :key="bug.id">
+          <h2>{{ bug.title }}</h2>
+        </router-link>
+        <p class="green">
+          Closed
+        </p>
       </div>
     </div>
   </div>
@@ -32,6 +38,19 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
+.green{
+  color: rgb(7, 136, 7);
+  font-weight: bold;
+}
+.closed{
+  background-color: rgba(1, 161, 1, 0.623);
+}
+.open{
+background-color: rgba(219, 25, 25, 0.52);}
+.red{
+  color: rgb(167, 18, 18);
+  font-weight: bold;
+}
 
 </style>

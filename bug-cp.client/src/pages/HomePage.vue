@@ -18,6 +18,19 @@
             Create
           </button>
         </form>
+        <div>
+          <div class="btn-group btn-group-toggle my-3" data-toggle="buttons">
+            <label class="btn btn-info all" @onclick="getBugs()">
+              <input type="radio" name="options" id="option1" checked> All
+            </label>
+            <label class="btn btn-info" @onclick="getOpenBugs()">
+              <input type="radio" name="options" id="option2"> Open
+            </label>
+            <label class="btn btn-info" @click="getClosedBugs()">
+              <input type="radio" name="options" id="option3"> Closed
+            </label>
+          </div>
+        </div>
       </div>
     </div>
     <div class="row">
