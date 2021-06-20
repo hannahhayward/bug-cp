@@ -1,25 +1,66 @@
 <template>
-  <div class="home flex-grow-1 d-flex flex-column align-items-center justify-content-center">
-    <img src="https://bcw.blob.core.windows.net/public/img/8600856373152463" alt="CodeWorks Logo">
-    <h1 class="my-5 bg-dark text-light p-3 rounded d-flex align-items-center">
-      <span class="mx-2 text-white">Vue 3 Starter</span>
-    </h1>
+  <div class="container-fluid">
+    <div class="row my-3">
+      <div class="col-lg-10 m-auto">
+        <h6 class="text-center">
+          Report a Bug
+        </h6>
+        <form id="bug-form" @submit.prevent="createBug(state.newBugData)">
+          <div class="input-group my-1">
+            <label for="title" class="sr-only">Title</label>
+            <input type="text" placeholder="Title" required class="form-control" v-model="state.newBugData.title">
+          </div>
+          <div class="input-group my-1">
+            <label for="description" class="sr-only">description</label>
+            <input type="text" placeholder="Description" required class="form-control" v-model="state.newBugData.description">
+          </div>
+          <button class="btn btn-block btn-primary" type="submit">
+            Create
+          </button>
+        </form>
+      </div>
+    </div>
+    <div class="row">
+      <Bug v-for="bug in bugs" :key="bug.id" :bug="bug" />
+    </div>
   </div>
 </template>
 
 <script>
+import { computed, reactive } from '@vue/runtime-core'
+import { bugService } from '../services/BugService'
+import Notification from '../utils/Notification'
+import { AppState } from '../AppState'
+import Bug from '../components/Bug.vue'
 export default {
-  name: 'Home'
+  components: { Bug },
+  name: 'Home',
+  setup() {
+    const state = reactive({
+      newBugData: {}
+    })
+    // onMounted(async() => {
+    //   try {
+    //     bugService.getBugs()
+    //   } catch (error) {
+
+    //   }
+    // })
+    return {
+      state,
+      bugs: computed(() => AppState.bugs),
+      createBug(newBugData) {
+        try {
+          bugService.createBug(newBugData)
+        } catch (error) {
+          Notification.toast(error)
+        }
+      }
+    }
+  }
 }
 </script>
 
 <style scoped lang="scss">
-.home{
-  text-align: center;
-  user-select: none;
-  > img{
-    height: 200px;
-    width: 200px;
-  }
-}
+
 </style>

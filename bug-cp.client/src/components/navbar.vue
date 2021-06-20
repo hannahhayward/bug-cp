@@ -27,11 +27,11 @@
             Home
           </router-link>
         </li>
-        <li class="nav-item">
-          <router-link :to="{ name: 'About' }" class="nav-link">
-            About
+        <!-- <li class="nav-item">
+          <router-link :to="{ name: 'Bug' }" class="nav-link">
+            Bugs
           </router-link>
-        </li>
+        </li> -->
       </ul>
       <span class="navbar-text">
         <button
