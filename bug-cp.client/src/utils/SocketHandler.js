@@ -41,7 +41,7 @@ export class SocketHandler {
   }
 
   onAuthenticated(auth) {
-    logger.log('[SOCKET_AUTHENTICATED]', auth)
+    // logger.log('[SOCKET_AUTHENTICATED]', auth)
     const playback = [...queue]
     queue = []
     playback.forEach(e => {

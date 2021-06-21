@@ -6,13 +6,11 @@ class BugService {
   async getBugs() {
     const res = await api.get('/api/bugs/')
     AppState.bugs = res.data
-    logger.log(AppState.bugs, 'appstate after get in service')
   }
 
   async getActiveBug(bugId) {
     const res = await api.get('/api/bugs/' + bugId)
     AppState.activeBug = res.data
-    logger.log(AppState.activeBug, 'active bug from the service')
   }
 
   async createBug(newBugData) {
@@ -22,6 +20,14 @@ class BugService {
 
   async deleteBug(bugId) {
     const res = await api.delete('/api/bugs/' + bugId)
+    AppState.bugs = res.data
+  }
+
+  async editBug(bugId, editedBugData) {
+    const res = await api.put('/api/bugs/' + bugId, editedBugData)
+    logger.log(res.data, 'edit bug in the service')
+    AppState.activeBug = res.data
+    logger.log(AppState.activeBug, 'active bug appstate now')
     AppState.bugs = res.data
   }
 }

@@ -1,24 +1,28 @@
 <template>
   <div class="col-lg-10 m-auto">
-    <div class="card my-2 open" v-if="bug.status === false">
+    <div class="card closed my-2" v-if="bug.closed === true">
       <div class="card-header">
-        <router-link :to="{ name: 'Bug', params: {id: bug.id}}" :key="bug.id">
-          <h2>{{ bug.title }}</h2>
+        <router-link :to="{ name: 'Bug', params: {id: bug.id}}" :key="bug.id" style="text-decoration: none">
+          <h2 class="text-white">
+            {{ bug.title }}
+          </h2>
+        </router-link>
+        <p> Updated on: {{ bug.updatedAt.split('T')[0] }}</p>
+        <p class="green">
+          Closed
+        </p>
+      </div>
+    </div>
+    <div class="card my-2 open" v-if="bug.closed === false">
+      <div class="card-header">
+        <router-link :to="{ name: 'Bug', params: {id: bug.id}}" :key="bug.id" style="text-decoration: none">
+          <h2 class="text-white">
+            {{ bug.title }}
+          </h2>
         </router-link>
         <p> Updated on: {{ bug.createdAt.split('T')[0] }}</p>
         <p class="red">
           Open
-        </p>
-      </div>
-    </div>
-    <div class="card my-2" v-if="bug.status === true">
-      <div class="card-header">
-        <router-link :to="{ name: 'Bug', params: {id: bug.id}}" :key="bug.id">
-          <h2>{{ bug.title }}</h2>
-        </router-link>
-        <p> Updated on: {{ bug.createdAt.split('T')[0] }}</p>
-        <p class="green">
-          Closed
         </p>
       </div>
     </div>
@@ -42,7 +46,7 @@ export default {
 
 <style scoped>
 .green{
-  color: rgb(7, 136, 7);
+  color: rgb(5, 82, 5);
   font-weight: bold;
 }
 .closed{

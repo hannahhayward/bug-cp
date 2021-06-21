@@ -22,7 +22,7 @@ class BugsService {
   }
 
   async editBug(id, newBugData) {
-    const closedBug = await dbContext.Bug.findOne({ _id: id })
+    const closedBug = await dbContext.Bug.findOne({ _id: id }).populate('creator', 'name picture')
     if (closedBug.closed === true) {
       throw new BadRequest('this bug is closed')
     } else {

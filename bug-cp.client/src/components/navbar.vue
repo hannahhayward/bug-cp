@@ -4,9 +4,14 @@
       <div class="d-flex flex-column align-items-center">
         <img
           alt="logo"
-          src="../assets/img/cw-logo.png"
+          src="https://www.pinclipart.com/picdir/middle/499-4998717_ants-on-a-log-clipart-png-download.png"
           height="45"
         />
+      </div>
+      <div>
+        <p class="mx-2 mt-2">
+          Bug Log
+        </p>
       </div>
     </router-link>
     <button
