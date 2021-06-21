@@ -5,6 +5,7 @@
         <router-link :to="{ name: 'Bug', params: {id: bug.id}}" :key="bug.id">
           <h2>{{ bug.title }}</h2>
         </router-link>
+        <p> Updated on: {{ bug.createdAt.split('T')[0] }}</p>
         <p class="red">
           Open
         </p>
@@ -15,6 +16,7 @@
         <router-link :to="{ name: 'Bug', params: {id: bug.id}}" :key="bug.id">
           <h2>{{ bug.title }}</h2>
         </router-link>
+        <p> Updated on: {{ bug.createdAt.split('T')[0] }}</p>
         <p class="green">
           Closed
         </p>

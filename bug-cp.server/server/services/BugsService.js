@@ -22,23 +22,19 @@ class BugsService {
   }
 
   async editBug(id, newBugData) {
-    delete newBugData.status
-    const bug = await dbContext.Bug.findByIdAndUpdate(id, newBugData, { new: true, runValidators: true })
-    if (bug.status === true) {
+    const closedBug = await dbContext.Bug.findOne({ _id: id })
+    if (closedBug.closed === true) {
       throw new BadRequest('this bug is closed')
+    } else {
+      const bug = await dbContext.Bug.findByIdAndUpdate({ _id: id }, newBugData, { new: true, runValidators: true })
+      if (!bug) {
+        throw new BadRequest('Cannot Locate Bug With That Id')
+      } return bug
     }
-    if (!bug) {
-      throw new BadRequest('Cannot Locate Bug With That Id')
-    }
-    return bug
   }
 
   async deleteBug(id, newData) {
-    const closed = (newData.status = true)
-    const bug = await dbContext.Bug.findByIdAndUpdate(id, closed)
-    if (bug.status === true) {
-      throw new BadRequest('Cannot not edit, this bug is closed')
-    }
+    const bug = await dbContext.Bug.findByIdAndUpdate({ _id: id }, { closed: true }, { new: true, runValidators: true })
     if (!bug) {
       throw new BadRequest('Cannot Locate Bug With That Id')
     }

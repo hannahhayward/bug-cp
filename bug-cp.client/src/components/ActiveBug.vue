@@ -1,6 +1,10 @@
 <template>
   <div class="card open" v-if="state.bug.status === false">
     <div class="card-header">
+      <div class="text-right">
+        <i class="far fa-times-circle mx-1" @click="deleteBug(state.bug.id)"></i>
+        <i class="fas fa-edit mx-1" @click="editBug(state.bug.id)"></i>
+      </div>
       <h3>{{ state.bug.title }}</h3>
       <p v-if="state.bug.status === false" class="red">
         Open
@@ -36,6 +40,7 @@ import { reactive } from '@vue/reactivity'
 import { computed, onMounted } from '@vue/runtime-core'
 import { AppState } from '../AppState'
 import { notesService } from '../services/NotesService'
+import { bugService } from '../services/BugService'
 export default {
   setup() {
     const state = reactive({
@@ -46,7 +51,12 @@ export default {
       notesService.getNotes()
     })
     return {
-      state
+      state,
+      deleteBug(id) {
+        if (confirm('Do you really want to delete this board ??')) {
+          bugService.deleteBug(id)
+        }
+      }
     }
   }
 }

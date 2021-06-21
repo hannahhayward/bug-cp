@@ -20,13 +20,13 @@
         </form>
         <div>
           <div class="btn-group btn-group-toggle my-3" data-toggle="buttons">
-            <label class="btn btn-info all" @onclick="getBugs()">
+            <label class="btn btn-info all">
               <input type="radio" name="options" id="option1" checked> All
             </label>
-            <label class="btn btn-info" @onclick="getOpenBugs()">
+            <label class="btn btn-info">
               <input type="radio" name="options" id="option2"> Open
             </label>
-            <label class="btn btn-info" @click="getClosedBugs()">
+            <label class="btn btn-info">
               <input type="radio" name="options" id="option3"> Closed
             </label>
           </div>
