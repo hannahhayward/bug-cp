@@ -2,8 +2,8 @@
   <div class="card open" v-if="state.bug.closed === false">
     <div class="card-header">
       <div class="text-right" v-if="state.bug.creatorId === state.account.id">
-        <i class="far fa-times-circle mx-1" @click="deleteBug(state.bug.id)"></i>
-        <i class="fas fa-edit mx-1" @click="toggleForm()"></i>
+        <i class="far fa-times-circle mx-1 fa-lg" @click="deleteBug(state.bug.id)"></i>
+        <i class="fas fa-edit mx-1 fa-lg" @click="toggleForm()"></i>
       </div>
       <h3>{{ state.bug.title }}</h3>
       <p v-if="state.bug.closed === false" class="red">
@@ -44,7 +44,7 @@
                  v-model="state.newComment.body"
           >
         </div>
-        <button class="btn btn-info btn-block">
+        <button class="btn btn-dark btn-block">
           Add a Comment
         </button>
       </form>
@@ -113,7 +113,7 @@ export default {
 
 <style lang="scss" scoped>
 .green{
-  color: rgb(7, 136, 7);
+  color: #045604;
   font-weight: bold;
 }
 .closed{

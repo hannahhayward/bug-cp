@@ -3,7 +3,7 @@
     <div class="card closed my-2" v-if="bug.closed === true">
       <div class="card-header">
         <router-link :to="{ name: 'Bug', params: {id: bug.id}}" :key="bug.id" style="text-decoration: none">
-          <h2 class="text-white">
+          <h2 class="text-dark">
             {{ bug.title }}
           </h2>
         </router-link>
@@ -16,7 +16,7 @@
     <div class="card my-2 open" v-if="bug.closed === false">
       <div class="card-header">
         <router-link :to="{ name: 'Bug', params: {id: bug.id}}" :key="bug.id" style="text-decoration: none">
-          <h2 class="text-white">
+          <h2 class="text-dark">
             {{ bug.title }}
           </h2>
         </router-link>
@@ -46,7 +46,7 @@ export default {
 
 <style scoped>
 .green{
-  color: rgb(5, 82, 5);
+  color: rgb(4, 41, 4);
   font-weight: bold;
 }
 .closed{
@@ -55,7 +55,7 @@ export default {
 .open{
 background-color: rgba(219, 25, 25, 0.52);}
 .red{
-  color: rgb(167, 18, 18);
+  color: rgb(54, 6, 6);
   font-weight: bold;
 }
 

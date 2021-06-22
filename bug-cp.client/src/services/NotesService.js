@@ -4,20 +4,30 @@ import { api } from './AxiosService'
 
 class NotesService {
   async getNotes(bugId) {
-    const res = await api.get(`api/bugs/${bugId}/notes`)
-    logger.log(res.data, 'notes res')
-    AppState.notes = res.data
+    try {
+      const res = await api.get(`api/bugs/${bugId}/notes`)
+      AppState.notes = res.data
+    } catch (error) {
+      Notification.toast(error, error)
+    }
   }
 
   async createNote(newNoteData) {
-    const res = await api.post('api/notes', newNoteData)
-    logger.log(res.data, 'your new note data sir')
-    AppState.notes = res.data
+    try {
+      const res = await api.post('api/notes', newNoteData)
+      AppState.notes = res.data
+    } catch (error) {
+      Notification.toast(error, error)
+    }
   }
 
   async deleteNote(noteId) {
-    logger.log('reached the service to delete note')
-    await api.delete('api/notes/' + noteId)
+    try {
+      logger.log('reached the service to delete note')
+      await api.delete('api/notes/' + noteId)
+    } catch (error) {
+      Notification.toast(error, error)
+    }
   }
 }
 export const notesService = new NotesService()

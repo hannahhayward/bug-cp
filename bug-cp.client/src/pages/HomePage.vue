@@ -14,12 +14,12 @@
             <label for="description" class="sr-only">description</label>
             <input type="text" placeholder="Description" required class="form-control" v-model="state.newBugData.description">
           </div>
-          <button class="btn btn-block btn-primary" type="submit">
+          <button class="btn btn-block btn-outline-dark" type="submit">
             Create
           </button>
         </form>
         <div>
-          <div class="btn-group btn-group-toggle my-3" data-toggle="buttons">
+          <!-- <div class="btn-group btn-group-toggle my-3" data-toggle="buttons">
             <label class="btn btn-info all">
               <input type="radio" name="options" id="option1" checked> All
             </label>
@@ -29,7 +29,7 @@
             <label class="btn btn-info">
               <input type="radio" name="options" id="option3"> Closed
             </label>
-          </div>
+          </div> -->
         </div>
       </div>
     </div>

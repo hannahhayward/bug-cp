@@ -1,34 +1,52 @@
 import { AppState } from '../AppState'
-import { logger } from '../utils/Logger'
+import Notification from '../utils/Notification'
 import { api } from './AxiosService'
 
 class BugService {
   async getBugs() {
-    const res = await api.get('/api/bugs/')
-    AppState.bugs = res.data
+    try {
+      const res = await api.get('/api/bugs/')
+      AppState.bugs = res.data
+    } catch (error) {
+      Notification.toast(error, error)
+    }
   }
 
   async getActiveBug(bugId) {
-    const res = await api.get('/api/bugs/' + bugId)
-    AppState.activeBug = res.data
+    try {
+      const res = await api.get('/api/bugs/' + bugId)
+      AppState.activeBug = res.data
+    } catch (error) {
+      Notification.toast(error, error)
+    }
   }
 
   async createBug(newBugData) {
-    const res = await api.post('/api/bugs', newBugData)
-    AppState.bugs = res.data
+    try {
+      const res = await api.post('/api/bugs', newBugData)
+      AppState.bugs = res.data
+    } catch (error) {
+      Notification.toast(error, error)
+    }
   }
 
   async deleteBug(bugId) {
-    const res = await api.delete('/api/bugs/' + bugId)
-    AppState.bugs = res.data
+    try {
+      const res = await api.delete('/api/bugs/' + bugId)
+      AppState.bugs = res.data
+    } catch (error) {
+      Notification.toast(error, error)
+    }
   }
 
   async editBug(bugId, editedBugData) {
-    const res = await api.put('/api/bugs/' + bugId, editedBugData)
-    logger.log(res.data, 'edit bug in the service')
-    AppState.activeBug = res.data
-    logger.log(AppState.activeBug, 'active bug appstate now')
-    AppState.bugs = res.data
+    try {
+      const res = await api.put('/api/bugs/' + bugId, editedBugData)
+      AppState.activeBug = res.data
+      AppState.bugs = res.data
+    } catch (error) {
+      Notification.toast(error, error)
+    }
   }
 }
 export const bugService = new BugService()
