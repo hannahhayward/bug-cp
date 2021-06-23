@@ -17,7 +17,7 @@ class NotesService {
   }
 
   async editNote(id, newNoteData) {
-    const note = await dbContext.Note.findByIdAndUpdate(id, newNoteData, { new: true, runValidators: true })
+    const note = await dbContext.Note.findByIdAndUpdate({ _id: id, creatorId: id }, newNoteData, { new: true, runValidators: true })
     if (!note) {
       throw new BadRequest('cannot find note with that id ')
     }
@@ -25,7 +25,7 @@ class NotesService {
   }
 
   async deleteNote(id) {
-    const note = await dbContext.Note.findByIdAndDelete(id)
+    const note = await dbContext.Note.findByIdAndDelete({ _id: id, creatorId: id })
     if (!note) {
       throw new BadRequest('cannot find note with that id ')
     }

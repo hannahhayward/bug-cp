@@ -1,4 +1,5 @@
 import { AppState } from '../AppState'
+import { logger } from '../utils/Logger'
 import Notification from '../utils/Notification'
 import { api } from './AxiosService'
 
@@ -7,6 +8,7 @@ class BugService {
     try {
       const res = await api.get('/api/bugs/')
       AppState.bugs = res.data
+      AppState.bugs = AppState.bugs.sort((a, b) => { if (a.closed < b.closed) { return -1 } if (a.closed > b.closed) { return 1 } return 0 })
     } catch (error) {
       Notification.toast(error, error)
     }
@@ -25,6 +27,8 @@ class BugService {
     try {
       const res = await api.post('/api/bugs', newBugData)
       AppState.bugs = res.data
+      AppState.activeBug = res.data
+      logger.log(AppState.activeBug, 'new active bug')
     } catch (error) {
       Notification.toast(error, error)
     }

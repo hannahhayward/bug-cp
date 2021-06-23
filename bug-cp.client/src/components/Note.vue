@@ -6,7 +6,7 @@
     </div>
     <div class="margin">
       {{ note.body }}
-      <div v-if="state.account.id === note.creatorId" class="text-right">
+      <div class="text-right" v-if="note.creator.id === state.account.id">
         <i class="far fa-times-circle mx-1" @click="deleteNote(note.id)"></i>
       </div>
     </div>

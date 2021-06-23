@@ -26,7 +26,7 @@ class BugsService {
     if (closedBug.closed === true) {
       throw new BadRequest('this bug is closed')
     } else {
-      const bug = await dbContext.Bug.findByIdAndUpdate({ _id: id }, newBugData, { new: true, runValidators: true })
+      const bug = await dbContext.Bug.findByIdAndUpdate({ _id: id, creatorId: id }, newBugData, { new: true, runValidators: true })
       if (!bug) {
         throw new BadRequest('Cannot Locate Bug With That Id')
       } return bug
@@ -34,7 +34,7 @@ class BugsService {
   }
 
   async deleteBug(id, newData) {
-    const bug = await dbContext.Bug.findByIdAndUpdate({ _id: id }, { closed: true }, { new: true, runValidators: true })
+    const bug = await dbContext.Bug.findByIdAndUpdate({ _id: id, creatorId: id }, { closed: true }, { new: true, runValidators: true })
     if (!bug) {
       throw new BadRequest('Cannot Locate Bug With That Id')
     }

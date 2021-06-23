@@ -1,5 +1,6 @@
 import { AppState } from '../AppState'
 import { logger } from '../utils/Logger'
+import Notification from '../utils/Notification'
 import { api } from './AxiosService'
 
 class NotesService {
@@ -23,7 +24,6 @@ class NotesService {
 
   async deleteNote(noteId) {
     try {
-      logger.log('reached the service to delete note')
       await api.delete('api/notes/' + noteId)
     } catch (error) {
       Notification.toast(error, error)
